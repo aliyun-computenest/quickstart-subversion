@@ -15,7 +15,7 @@ Subversion服务在计算巢上部署的费用主要涉及：
 
 Subversion是单机部署架构
 
-![5.png](5.png)
+![4.png](4.png)
 
 ## RAM账号所需权限
 Subversion服务需要对ECS、VPC等资源进行访问和创建操作，若您使用RAM用户创建服务实例，需要在创建服务实例前，对使用的RAM用户的账号添加相应资源的权限。
