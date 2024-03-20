@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="计算巢是阿里云开放给企业应用服务商的服务管理平台。服务商能够在计算巢上发布私有化部署服务，为其客户提供云上软件一键部署的能力；同时也支持全托管模式的服务，赋能服务商托管其客户资源。">
+  <title>Subversion服务私有化一键部署文档 - Aliyun 计算巢 x Demo</title>
+
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+  <link rel="stylesheet" href="css/theme.css">
+  
+
+  
+
+  
+  
+
+  
+    <script src="search/main.js"></script>
+  
+
+  
+
+  <script src="js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="nav-inner">
+        <div class="logo">
+          <img src="./img/logo-2x.png">
+        </div>
+        <div class="nav-list">
+          <ul>
+          
+              <li><a href="#subversion">Subversion服务私有化一键部署文档</a></li>
+              
+                  <li><a href="#_1">概述</a></li>
+                  
+              
+                  <li><a href="#_2">计费说明</a></li>
+                  
+              
+                  <li><a href="#_3">部署架构</a></li>
+                  
+              
+                  <li><a href="#ram">RAM账号所需权限</a></li>
+                  
+              
+                  <li><a href="#_4">部署流程</a></li>
+                  
+                      <li class="li-h3"><a href="#_5">部署步骤</a></li>
+                  
+                      <li class="li-h3"><a href="#_6">部署参数说明</a></li>
+                  
+                      <li class="li-h3"><a href="#_7">验证结果</a></li>
+                  
+                      <li class="li-h3"><a href="#subversion_1">使用Subversion服务</a></li>
+                  
+              
+          
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="content theme-github">
+      
+      <div class="content-inner">        
+        
+        <h1 id="subversion">Subversion服务私有化一键部署文档</h1>
+<h2 id="_1">概述</h2>
+<p>Subversion是一个开放源代码的版本控制系统，通过采用分支管理系统的高效管理，简而言之就是用于多个人共同开发同一个项目，实现共享资源，实现最终集中式的管理。</p>
+<h2 id="_2">计费说明</h2>
+<p>Subversion服务在计算巢上部署的费用主要涉及：
+- 所选vCPU与内存规格
+- 磁盘容量</p>
+<p>计费方式包括
+- 按量付费（小时）
+- 包年包月</p>
+<h2 id="_3">部署架构</h2>
+<p>Subversion是单机部署架构</p>
+<p><img alt="4.png" src="4.png" /></p>
+<h2 id="ram">RAM账号所需权限</h2>
+<p>Subversion服务需要对ECS、VPC等资源进行访问和创建操作，若您使用RAM用户创建服务实例，需要在创建服务实例前，对使用的RAM用户的账号添加相应资源的权限。
+添加RAM权限的详细操作，请参见为RAM用户授权。所需权限如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>权限策略名称</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AliyunECSFullAccess</td>
+<td>管理云服务器服务（ECS）的权限</td>
+</tr>
+<tr>
+<td>AliyunVPCFullAccess</td>
+<td>管理专有网络（VPC）的权限</td>
+</tr>
+<tr>
+<td>AliyunROSFullAccess</td>
+<td>管理资源编排服务（ROS）的权限</td>
+</tr>
+<tr>
+<td>AliyunComputeNestUserFullAccess</td>
+<td>管理计算巢服务（ComputeNest）的用户侧权限</td>
+</tr>
+<tr>
+<td>AliyunCloudMonitorFullAccess</td>
+<td>管理云监控（CloudMonitor）的权限</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_4">部署流程</h2>
+<h3 id="_5">部署步骤</h3>
+<p>单击<a href="https://computenest.console.aliyun.com/service/instance/create/cn-hangzhou?type=user&amp;ServiceId=service-9d26745bc600423e8455">部署链接</a>，
+进入服务实例部署界面，根据界面提示，填写参数完成部署。</p>
+<h3 id="_6">部署参数说明</h3>
+<p>您在创建服务实例的过程中，需要配置服务实例信息。下文介绍Subversion社区版服务实例输入参数的详细信息。</p>
+<table>
+<thead>
+<tr>
+<th>参数组</th>
+<th>参数项</th>
+<th>示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>服务实例名称</td>
+<td></td>
+<td>test</td>
+<td>实例的名称</td>
+</tr>
+<tr>
+<td>地域</td>
+<td></td>
+<td>华东1（杭州）</td>
+<td>选中服务实例的地域，建议就近选中，以获取更好的网络延时。</td>
+</tr>
+<tr>
+<td>支付配置</td>
+<td>付费类型</td>
+<td>按量付费 或 包年包月</td>
+<td></td>
+</tr>
+<tr>
+<td>ECS实例配置</td>
+<td>实例类型</td>
+<td>ecs.g6.large</td>
+<td>实例规格，可以根据实际需求选择</td>
+</tr>
+<tr>
+<td>ECS实例配置</td>
+<td>实例密码</td>
+<td><strong><em>*</em></strong>*</td>
+<td>设置实例密码。长度830个字符，必须包含三项（大写字母、小写字母、数字、()`!@#$%^&amp;*-+={}[]:;'&lt;&gt;,.?/ 中的特殊符号）</td>
+</tr>
+<tr>
+<td>基础资源配置</td>
+<td>部署区域</td>
+<td>可用区I</td>
+<td>地域下的不同可用区域</td>
+</tr>
+<tr>
+<td>基础资源配置</td>
+<td>VPC ID</td>
+<td>vpc-xxx</td>
+<td>选择专有网络的ID。</td>
+</tr>
+<tr>
+<td>基础资源配置</td>
+<td>交换机</td>
+<td>vsw-xxx</td>
+<td>选择交换机ID。若找不到交换机, 可尝试切换地域和可用区</td>
+</tr>
+<tr>
+<td>Subversion用户配置</td>
+<td>Subversion用户名</td>
+<td>svn_user</td>
+<td></td>
+</tr>
+<tr>
+<td>Subversion用户配置</td>
+<td>Subversion密码</td>
+<td>svn_password</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><img alt="1.png" src="1.png" /></p>
+<h3 id="_7">验证结果</h3>
+<p>查看服务实例。 服务实例创建成功后，部署时间大约需要1分钟。部署完成后，页面上可以看到对应的服务实例。</p>
+<p><img alt="2.png" src="2.png" /></p>
+<p>进入服务实例概览页后，可以通过SvnEndpoint和设置的Subversion用户名访问Subversion服务。</p>
+<p><img alt="3.png" src="3.png" /></p>
+<h3 id="subversion_1">使用Subversion服务</h3>
+<p>请访问Subversion官网了解如何使用Subversion：<a href="https://subversion.apache.org/">Subversion官网</a></p>
+        
+      </div>
+
+      <div class="copyrights">© 2009-2022 Aliyun.com 版权所有</div>
+    </div>
+  </div>
+  
+  <!--
+  MkDocs version      : 1.5.3
+  Docs Build Date UTC : 2024-03-20 06:52:17.340444+00:00
+  -->
+</body>
+</html>
